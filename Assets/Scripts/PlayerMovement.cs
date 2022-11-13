@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    public static Action<Vector2> OnDirectionChange;
     public float speed;
     private Vector2 direction;
     private Animator animator;
@@ -12,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        OnDirectionChange.Invoke(Vector2.up);
     }
 
     void Update()
@@ -34,18 +34,22 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             direction += Vector2.up;
+            OnDirectionChange.Invoke(direction);
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             direction += Vector2.left;
+            OnDirectionChange.Invoke(direction);
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             direction += Vector2.down;
+            OnDirectionChange.Invoke(direction);
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             direction += Vector2.right;
+            OnDirectionChange.Invoke(direction);
         }
     }
 
