@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private int maxHP = 100;
 
     private int currentHP;
 
-    
     private void Start()
     {
         currentHP = maxHP;
@@ -30,6 +29,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public void ProcessDeath()
     {
-        Debug.Log("You died :(");
+        Destroy(gameObject);
     }
 }
